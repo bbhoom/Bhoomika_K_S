@@ -105,7 +105,7 @@ export const myProjects = [
                 name: 'Python',
                 path: '/Bhoomika_K_S/assets/Python-logo.webp',
             },
-            ,
+
         ],
     },
     {
@@ -216,11 +216,87 @@ export const myProjects = [
             {
                 id: 2,
                 name: 'TailwindCSS',
-                path: '/Bhoomika_K_S/assets/streamlit.png',
+                path: '/Bhoomika_K_S/assets/tailwindcss.png',
             },
         ],
     },
+    {
+        title: 'GlobalChat Hub - Real-Time Java Spring Boot Chat',
+        desc: 'GlobalChat Hub is a real-time chat application built with Java Spring Boot and WebSockets. It enables users worldwide to communicate instantly, supporting group chats, private messaging, and live notifications.',
+        subdesc: 'Developed using Java, Spring Boot, and WebSocket technology, GlobalChat Hub ensures seamless and scalable communication, providing a smooth real-time chat experience across devices.',
+        href: 'https://springboot-websocket-chat-jnjb.onrender.com/',
+        texture: '/Bhoomika_K_S/textures/project/project8.mp4',
+        logo: '/Bhoomika_K_S/assets/project-logo6.png',
+        logoStyle: {
+            backgroundColor: '#0A1F44',
+            border: '0.2px solid #1A3C6C',
+            boxShadow: '0px 0px 60px 0px #4C9EFF4D',
+        },
+        spotlight: '/Bhoomika_K_S/assets/spotlight6.png',
+        tags: [
+            {
+                id: 1,
+                name: 'Java',
+                path: '/Bhoomika_K_S/assets/java.png',
+            },
+            {
+                id: 2,
+                name: 'Spring Boot',
+                path: '/Bhoomika_K_S/assets/springboot.png',
+            },
+        ],
+    },
+    {
+        title: 'CapyCare',
+        desc: 'CapyCare is an AI-powered assistant designed to help you live a healthier life. It provides personalized health tips, meal plans, fitness guidance, and tracks your wellness goals.',
+        subdesc: 'Built with the MERN stack and Flask, CapyCare leverages AI to deliver actionable insights for physical and mental well-being, offering an intuitive and interactive platform for everyday health management.',
+        href: 'https://capycare.onrender.com/',
+        texture: '/Bhoomika_K_S/textures/project/projectvid9.mp4',
+        logo: '/Bhoomika_K_S/assets/projectlogo9.png',
+        logoStyle: {
+            backgroundColor: '#1B3E2D',
+            border: '0.2px solid #2E6C4F',
+            boxShadow: '0px 0px 60px 0px #34D3994D',
+        },
+        spotlight: '/Bhoomika_K_S/assets/spotlight7.png',
+        tags: [
+            {
+                id: 1,
+                name: 'React',
+                path: '/Bhoomika_K_S/assets/react.svg',
+            },
+
+            {
+                id: 2,
+                name: 'Node',
+                path: '/Bhoomika_K_S/assets/node.png',
+            },
+        ],
+    },
+
 ];
+
+// Filter function for projects
+export const filterProjects = (projects, filter) => {
+    if (filter === 'all') return projects;
+
+    return projects.filter(project => {
+        const tags = project.tags.map(tag => tag.name.toLowerCase());
+
+        switch (filter) {
+            case 'python':
+                return tags.includes('python');
+            case 'react':
+                return tags.includes('react.js') || tags.includes('react');
+            case 'java':
+                return tags.includes('java') || tags.includes('spring boot');
+            case 'gamedev':
+                return tags.includes('unity') || tags.includes('c#') || tags.includes('python') && project.title.toLowerCase().includes('game');
+            default:
+                return true;
+        }
+    });
+};
 export const achievementscode = [
     {
         title: "Hackathon Winner",

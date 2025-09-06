@@ -1,16 +1,19 @@
 import React, { Suspense, useEffect, useState } from 'react';
 import CanvasLoader from "../components/CanvasLoader";
-import { myProjects } from '../constants';
+import { myProjects, filterProjects } from '../constants';
 import { Canvas } from '@react-three/fiber';
 import { Center, OrbitControls } from '@react-three/drei';
 import DemoComp from '../components/DemoComp';
+import ProjectFilter from '../components/ProjectFilter';
 
 const projectCount = myProjects.length;
 
 const Projects = () => {
     const [pindex, setpindex] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
-    const currentProject = myProjects[pindex];
+    const [activeFilter, setActiveFilter] = useState('all');
+    const [filteredProjects, setFilteredProjects] = useState(myProjects);
+    const currentProject = filteredProjects[pindex] || myProjects[0];
 
     // Detect mobile device
     useEffect(() => {
@@ -23,12 +26,24 @@ const Projects = () => {
         return () => window.removeEventListener('resize', checkMobile);
     }, []);
 
+    // Handle filter changes
+    useEffect(() => {
+        const filtered = filterProjects(myProjects, activeFilter);
+        setFilteredProjects(filtered);
+        setpindex(0); // Reset to first project when filter changes
+    }, [activeFilter]);
+
+    const handleFilterChange = (filter) => {
+        setActiveFilter(filter);
+    };
+
     const handleNavigation = (direction) => {
+        const currentProjectCount = filteredProjects.length;
         setpindex((prevIndex) => {
             if (direction === 'previous') {
-                return prevIndex === 0 ? projectCount - 1 : prevIndex - 1;
+                return prevIndex === 0 ? currentProjectCount - 1 : prevIndex - 1;
             } else {
-                return prevIndex === projectCount - 1 ? 0 : prevIndex + 1;
+                return prevIndex === currentProjectCount - 1 ? 0 : prevIndex + 1;
             }
         });
     };
@@ -72,6 +87,14 @@ const Projects = () => {
     return (
         <section className='c-space my-20' id='work'>
             <p className='head-text'>My Projects</p>
+
+            {/* Filter Component */}
+            <ProjectFilter
+                activeFilter={activeFilter}
+                onFilterChange={handleFilterChange}
+                isMobile={isMobile}
+            />
+
             <div className='grid lg:grid-cols-2 grid-cols-1 mt-14 gap-5 w-full'>
                 <div className='flex flex-col gap-5 relative sm:p-10 py-10 px-5 shadow-2xl shadow-black-200'>
                     <div className='absolute top-0 right-0'>
@@ -103,7 +126,7 @@ const Projects = () => {
                             <img src="assets/left-arrow.png" alt="left" className='w-4 h-4' />
                         </button>
                         <div className='text-center text-black-300 dark:text-white text-sm'>
-                            {`Project ${pindex + 1} of ${projectCount}`}
+                            {`Project ${pindex + 1} of ${filteredProjects.length}`}
                         </div>
                         <button className='arrow-btn' onClick={() => handleNavigation('next')}>
                             <img src="assets/right-arrow.png" alt="right" className='w-4 h-4' />
