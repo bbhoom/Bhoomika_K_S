@@ -65,7 +65,7 @@ const Hero = () => {
             id="home"
         >
             <div className="w-full mx-auto flex flex-col sm:mt-36 c-space mt-14 gap-3">
-                <p className={`sm:text-3xl text-2xl font-medium text-center fornt-genralsans ${darkTheme ? "text-white" : "text-black"}`}>Hi,I am Bhoomika<span className='waving-hand'>👋</span></p>
+                <p className={`sm:text-3xl text-2xl font-medium text-center fornt-genralsans ${darkTheme ? "text-white" : "text-black"}`}>Hi, I am Bhoomika<span className='waving-hand'>👋</span></p>
                 <p className={`hero_tag text-center ${darkTheme ? 'text-gray-300' : 'text-neutral-700'}`}>
                     Software Developer and Student
                 </p>
