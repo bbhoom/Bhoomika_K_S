@@ -27,7 +27,7 @@ const Footer = () => {
 
                 <p>Bhoomika K S</p>
             </div>
-            <div className=' flex gap-1'>
+            {/* <div className=' flex gap-1'>
                 <div className='social-icon'>
                     <a href="https://www.github.com/"><img src="assets/github.svg" alt="github" className='w-6 h-6' /></a>
                 </div>
@@ -37,7 +37,7 @@ const Footer = () => {
                 <div className='social-icon'>
                     <a href="mailto:ksbhoomika43@gmail.com"><img src="assets/email.svg" alt="github" className='w-6 h-6' /></a>
                 </div>
-            </div>
+            </div> */}
             <p className="text-white-600">© 2024 All Rights Reserved.</p>
         </section>
     )
